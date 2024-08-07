@@ -4,6 +4,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh 'pwd'
+                sh 'ls'
                 sh 'cd Multibranch && npm install'
             }
         }
@@ -18,6 +20,7 @@ pipeline {
             }
             steps {
                 sh 'cd Multibranch && ./jenkins/scripts/deliver-for-development.sh'
+                
                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
                 sh 'cd Multibranch && ./jenkins/scripts/kill.sh'
             }
